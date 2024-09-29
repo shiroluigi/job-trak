@@ -1,0 +1,21 @@
+{
+  "name": "job-tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "js-sha256": "^0.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0",
+    "nodemon": "^3.1.7",
+    "pbkdf2": "^3.1.2"
+  }
+}
