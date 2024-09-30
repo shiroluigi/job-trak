@@ -5,7 +5,7 @@ const {
     registerUser,
     getallusers,
     removeAll
-} = require('../Controllers/control.js')
+} = require('../controllers/control.js')
 
 
 router.route('/users').get(getallusers).post(removeAll)
