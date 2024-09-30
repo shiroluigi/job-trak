@@ -6,9 +6,19 @@ require('dotenv').config()
 
 //POST
 const loginUser = async (req,res) => {
-    res.status(200).json({msg: 'login user'})
-    console.log("posted")
-    console.log(req.body)
+    let {name , password } = req.body
+    password = pbkdf2.pbkdf2Sync(password,process.env.SALT,1,32,'sha512').toString('base64')
+    const findUser = await user.findOne({ name, password})
+    let token = {
+        name,
+        password,
+        id : findUser.id
+    }
+    if(findUser)
+    {
+        token = jwt.sign(token,process.env.JWT_SECRET)
+    }
+    res.status(200).json({token})
 }   
 const registerUser = async (req,res) => {
     console.log(req.body)
@@ -17,7 +27,7 @@ const registerUser = async (req,res) => {
     const scram = pbkdf2.pbkdf2Sync(password,process.env.SALT,1,32,'sha512').toString('base64')
     cpy.password = scram
     const resp = await user.create(req.body)
-    console.log(resp)
+    // console.log(resp)
     res.status(200).json({msg: 'success'})
 }  
 const removeAll = async (req,res) => {
@@ -30,9 +40,13 @@ const getallusers = async (req,res) => {
     res.status(200).json({msg: users})
     console.log(users)
 }
+const dashboardGet = async (req,res) => {
+    res.status('200').json({msg: 'work'})
+}
 module.exports = {
     loginUser,
     registerUser,
     getallusers,
-    removeAll
+    removeAll,
+    dashboardGet
 }
