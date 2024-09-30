@@ -1,3 +1,4 @@
+
 const text = 'Login form'
 
 document.getElementById('loginClick').addEventListener('click', async () => {
@@ -16,7 +17,11 @@ document.getElementById('loginClick').addEventListener('click', async () => {
         request.setRequestHeader("Content-Type", "application/json")
         request.onreadystatechange = () => {
             if (request.readyState === XMLHttpRequest.DONE) {
-                console.log(request.responseText)
+                if(request.status === 200)
+                {
+                    // console.log(JSON.parse(request.responseText).token)
+                    document.cookie = `token=${JSON.parse(request.responseText).token};SameSite=None;secure`
+                }
             }
         }
         request.send(JSON.stringify(details))

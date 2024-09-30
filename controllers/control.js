@@ -9,6 +9,11 @@ const loginUser = async (req,res) => {
     let {name , password } = req.body
     password = pbkdf2.pbkdf2Sync(password,process.env.SALT,1,32,'sha512').toString('base64')
     const findUser = await user.findOne({ name, password})
+    if(!findUser)
+    {
+        res.status(401).json({msg: 'no match'})
+        return
+    }
     let token = {
         name,
         password,

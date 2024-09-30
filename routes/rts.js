@@ -1,5 +1,6 @@
 const express = require('express')
-const router = express.Router()
+const apiRouter = express.Router()
+const webRouter = express.Router()
 const {
     loginUser,
     registerUser,
@@ -8,11 +9,18 @@ const {
     dashboardGet
 } = require('../controllers/control.js')
 
+webRouter.route('/').get((req,res) => {
+    res.render('login')
+})
+webRouter.route('/dashboard').get((req,res) => {
+    res.render('login')
+})
 
-router.route('/users').get(getallusers).post(removeAll)
-router.route('/login').post(loginUser)
-router.route('/register').post(registerUser)
-router.route('/dashboard').get(dashboardGet)
+apiRouter.route('/users').get(getallusers).post(removeAll)
+apiRouter.route('/login').post(loginUser)
+apiRouter.route('/register').post(registerUser)
+apiRouter.route('/dashboard').get(dashboardGet)
 
 
-module.exports = {router}
+
+module.exports = { apiRouter,webRouter }
