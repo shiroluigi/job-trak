@@ -3,7 +3,11 @@ const pbkdf2 = require('pbkdf2')
 const user = require('../models/users')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-
+/* 
+#######################################################
+########## This is for all the api calls ##############
+#######################################################
+*/
 //POST
 const loginUser = async (req,res) => {
     let {name , password } = req.body
@@ -46,7 +50,7 @@ const getallusers = async (req,res) => {
     console.log(users)
 }
 const dashboardGet = async (req,res) => {
-    res.status('200').json({msg: 'work'})
+    res.status(200).json({msg: 'work'})
 }
 module.exports = {
     loginUser,

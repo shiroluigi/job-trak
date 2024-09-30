@@ -13,7 +13,7 @@ webRouter.route('/').get((req,res) => {
     res.render('login')
 })
 webRouter.route('/dashboard').get((req,res) => {
-    res.render('login')
+    res.render('dash')
 })
 
 apiRouter.route('/users').get(getallusers).post(removeAll)
