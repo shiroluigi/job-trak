@@ -7,6 +7,8 @@ require('dotenv').config()
 //POST
 const loginUser = async (req,res) => {
     res.status(200).json({msg: 'login user'})
+    console.log("posted")
+    console.log(req.body)
 }   
 const registerUser = async (req,res) => {
     console.log(req.body)
