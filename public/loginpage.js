@@ -5,7 +5,7 @@ document.getElementById('loginClick').addEventListener('click', async () => {
     try {
         const uname = document.getElementById('user').value
         const password = document.getElementById('password').value
-        if (!uname || !password || password.length <= 8) {
+        if (!uname || !password || password.length <= 2) {
             throw new Error("Uname or password is absent")
         }
         const details = {

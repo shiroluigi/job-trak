@@ -23,10 +23,20 @@ const getInfoFromApi = () => {
     x.send()
     x.onreadystatechange = () => {
         if (x.readyState == XMLHttpRequest.DONE) {
-            console.log("Done", x.response)
+            //TEMPORARY CHANGE
+            console.log("Done", x.response , JSON.parse(x.response).msg.name)
+            document.getElementById('tempgreet').textContent = JSON.parse(x.response).msg.name
         }
     }
 }
 
-
+document.getElementById('logout').addEventListener('click',()=>{
+    //Clear all cookie from stackOverflow https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
+    document.cookie.split(';').forEach(cookie => {
+        const eqPos = cookie.indexOf('=');
+        const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    });
+    document.location.href = '/'
+})
 getInfoFromApi()
