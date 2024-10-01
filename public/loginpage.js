@@ -17,10 +17,31 @@ document.getElementById('loginClick').addEventListener('click', async () => {
         request.setRequestHeader("Content-Type", "application/json")
         request.onreadystatechange = () => {
             if (request.readyState === XMLHttpRequest.DONE) {
-                if(request.status === 200)
-                {
+                if (request.status === 200) {
                     // console.log(JSON.parse(request.responseText).token)
                     document.cookie = `token=${JSON.parse(request.responseText).token};SameSite=None;secure`
+                    //Set Auth header and add bearer to authorize and redirect if OK
+                    let authString = ''
+                    if (!document.cookie) {
+                        return
+                    }
+                    const cookies = document.cookie.split(';')
+                    cookies.forEach(cookie => {
+                        const [a, b] = cookie.split('=');
+                        if (a.trim() === 'token') {
+                            authString = 'Bearer ' + b.trim();
+                            console.log(authString)
+                        }
+                    })
+                    const x = new XMLHttpRequest();
+                    x.open('GET', 'http://localhost:4000/api/dashboard');
+                    x.setRequestHeader('authentication', authString)
+                    x.send()
+                    x.onreadystatechange = () => {
+                        if (x.readyState == XMLHttpRequest.DONE) {
+                            window.location.href = '/dashboard'
+                        }
+                    }
                 }
             }
         }

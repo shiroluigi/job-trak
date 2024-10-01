@@ -50,12 +50,28 @@ const getallusers = async (req,res) => {
     console.log(users)
 }
 const dashboardGet = async (req,res) => {
-    res.status(200).json({msg: 'work'})
+    console.log(req.headers.authentication)
+    const [_ , data] = req.headers.authentication.split(' ')
+    console.log(data)
+    const decrypt = jwt.verify(data,process.env.JWT_SECRET,(err,d) => {
+        console.log("->" , d)
+        return d
+    })
+    res.status(200).json({msg: decrypt})
+}
+/* 
+#######################################################
+########## This is for all the web calls ##############
+#######################################################
+*/
+const renderDashboard = (req,res) => {
+    res.render('dash')
 }
 module.exports = {
     loginUser,
     registerUser,
     getallusers,
     removeAll,
-    dashboardGet
+    dashboardGet,
+    renderDashboard
 }
