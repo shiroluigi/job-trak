@@ -15,6 +15,9 @@ webRouter.route('/').get((req,res) => {
     res.render('login')
 })
 webRouter.route('/dashboard').get(renderDashboard)
+webRouter.route('/register').get((req,res) => {
+    res.render('register')
+})
 
 apiRouter.route('/users').get(getallusers).post(removeAll)
 apiRouter.route('/login').post(loginUser)

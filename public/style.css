@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Sixtyfour+Convergence:SCAN@-37&display=swap');
 * {
     margin: 0;
     padding: 0;
     font-size: large;
-}
+    font-family: "Edu AU VIC WA NT Guides", cursive;
 
 .main {
     width: 100vw;
