@@ -1,8 +1,13 @@
 
 const text = 'Login form'
 
-document.getElementById('loginClick').addEventListener('click', async () => {
+const submit = (eventType, event) => {
     try {
+        if (eventType == 'keypress') {
+            if (event.key != 'Enter') {
+                return
+            }
+        }
         const uname = document.getElementById('user').value
         const password = document.getElementById('password').value
         if (!uname || !password || password.length <= 2) {
@@ -49,8 +54,15 @@ document.getElementById('loginClick').addEventListener('click', async () => {
     } catch (error) {
         console.log(error)
     }
-})
+}
 
+document.addEventListener('keypress', (e) => {
+    console.log(e.key)
+    submit('keypress', e)
+})
+document.getElementById('loginClick').addEventListener('click', (e) => {
+    submit('click', e)
+})
 
 const typer = () => {
     let textmaker = ''

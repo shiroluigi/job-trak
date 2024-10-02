@@ -6,8 +6,22 @@
     <title>dashboard</title>
 </head>
 <body>
-    <div>Welcome!</div>
-    <div id="tempgreet"></div>
+    <div class="container">
+        <header>
+            <span>
+                <label>Welcome!</label>
+                <label id="tempgreet"></label>
+            </span>
+        </header>
+        <main>
+            <h2>Your Jobs</h2>
+            <ul id="job-list">
+            </ul>
+        </main>
+    </div>
+    <div>Create new job
+        <button>+</button>
+    </div>
     <button id="logout">Logout</button>
     <script src="dashboard.js" type="text/javascript"></script>
 </body>
