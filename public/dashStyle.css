@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Indie+Flower&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
+    font-family: "Indie Flower", cursive;
+    overflow-x: hidden;
+}
+#container {
+    width: 100vw;
+    height: 100vh;
 }
 #top-bar {
     width: 100%;
@@ -29,4 +37,24 @@
     &:hover{
         cursor: pointer;
     }
+}
+.horizontal-scroll {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 23%;
+    /* overflow-x: auto; */
+    /* overscroll-behavior-inline: contain; */
+    &:-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.job-card {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+}
+.job-list {
+    display: none;
 }

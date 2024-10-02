@@ -2,6 +2,7 @@ const { sha256 } = require('js-sha256')
 const pbkdf2 = require('pbkdf2')
 const user = require('../models/users')
 const jwt = require('jsonwebtoken')
+const jobs = require('../models/jobs')
 require('dotenv').config()
 /* 
 #######################################################
@@ -61,6 +62,12 @@ const dashboardGet = async (req, res) => {
     })
     res.status(200).json({ msg: decrypt })
 }
+const createJob = async (req,res) => {
+    const resp = await jobs.create(req.body)
+    console.log(resp)
+    console.log(req.body)
+    res.status(200).json({ msg: "job creation hit" })
+}
 /* 
 #######################################################
 ########## This is for all the web calls ##############
@@ -75,5 +82,6 @@ module.exports = {
     getallusers,
     removeAll,
     dashboardGet,
-    renderDashboard
+    renderDashboard,
+    createJob
 }

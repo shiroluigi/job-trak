@@ -8,7 +8,8 @@ const {
     getallusers,
     removeAll,
     dashboardGet,
-    renderDashboard
+    renderDashboard,
+    createJob
 } = require('../controllers/control.js')
 
 webRouter.route('/').get((req,res) => {
@@ -23,7 +24,7 @@ apiRouter.route('/users').get(getallusers).post(removeAll)
 apiRouter.route('/login').post(loginUser)
 apiRouter.route('/register').post(registerUser)
 apiRouter.route('/dashboard').get(authenticator , dashboardGet)
-
+apiRouter.route('/create').post(authenticator, createJob)
 
 
 module.exports = { apiRouter,webRouter }
