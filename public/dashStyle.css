@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#top-bar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgb(129, 129, 235);
+    padding: 10px;
+}
+#navlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#items {
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#greet {
+    font-size: 30px;
+}
+#logout{
+    width: 30px;
+    height: 100%;
+    &:hover{
+        cursor: pointer;
+    }
+}

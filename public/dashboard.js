@@ -25,7 +25,7 @@ const getInfoFromApi = () => {
         if (x.readyState == XMLHttpRequest.DONE) {
             //TEMPORARY CHANGE
             console.log("Done", x.response , JSON.parse(x.response).msg.name)
-            document.getElementById('tempgreet').textContent = JSON.parse(x.response).msg.name
+            document.getElementById('greet').textContent = JSON.parse(x.response).msg.name
         }
     }
 }
