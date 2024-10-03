@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
 const authenticator = (req, res, next) => {
-    console.log(req.headers)
+    // console.log(req.headers)
     if (!req.headers.authentication) {
         res.status(401).json({ msg: 'Unauthorized' })
         return
     }
     const c = req.headers.authentication.split(' ')
-    console.log(c)
+    // console.log(c)
     const [a, b] = c
     if(a.trim() != 'Bearer')
         res.status(401).json({ msg: 'Unauthorized' })
@@ -17,10 +17,11 @@ const authenticator = (req, res, next) => {
         }
         else {
             console.log("authenticated")
+            res.locals.decrypt = d
             next()
         }
     })
-    console.log("authentication middleware")
+    // console.log("authentication middleware")
 }
 
 

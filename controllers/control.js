@@ -46,6 +46,26 @@ const removeAll = async (req, res) => {
     const resp = await user.deleteMany()
     res.status(200).json({ resp })
 }
+const createJob = async (req,res) => {
+    const { position,company , status , date } = req.body
+    if(!position || !company || !status  || !date)
+    {
+        res.status(500).json({msg: 'Incomplete info provided'})
+    }
+    try {
+        const resp = await jobs.create({ forId: res.locals.decrypt.id , position , company , status , date})
+        console.log(resp)
+        console.log(req.body)
+        res.status(200).json({ msg: "job creation hit" })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({msg: 'Something went wrong,try again '})
+    }
+}
+const deletejobs = async  (req,res) => {
+    const resp = await jobs.deleteMany()
+    res.status(200).json(resp)
+}
 //GET
 const getallusers = async (req, res) => {
     const users = await user.find();
@@ -53,20 +73,15 @@ const getallusers = async (req, res) => {
     console.log(users)
 }
 const dashboardGet = async (req, res) => {
-    console.log(req.headers.authentication)
-    const [_, data] = req.headers.authentication.split(' ')
-    console.log(data)
-    const decrypt = jwt.verify(data, process.env.JWT_SECRET, (err, d) => {
-        console.log("->", d)
-        return d
-    })
-    res.status(200).json({ msg: decrypt })
+    res.status(200).json({ msg: res.locals.decrypt })
 }
-const createJob = async (req,res) => {
-    const resp = await jobs.create(req.body)
-    console.log(resp)
-    console.log(req.body)
-    res.status(200).json({ msg: "job creation hit" })
+const getJob = async (req,res) => {
+    const resp = await jobs.find({forId:res.locals.decrypt.id})
+    res.status(200).json({resp})
+}
+const getalljobs = async (req,res) => {
+    const resp = await jobs.find()
+    res.status(200).json(resp)
 }
 /* 
 #######################################################
@@ -83,5 +98,8 @@ module.exports = {
     removeAll,
     dashboardGet,
     renderDashboard,
-    createJob
+    createJob,
+    getalljobs,
+    deletejobs,
+    getJob
 }

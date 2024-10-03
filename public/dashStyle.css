@@ -39,9 +39,12 @@
     }
 }
 .horizontal-scroll {
+    background-color: rgba(0, 0, 0, 0.048);
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 23%;
+    margin-right: 30px;
+    margin-left: 30px;
+    grid-auto-columns: 33%;
     /* overflow-x: auto; */
     /* overscroll-behavior-inline: contain; */
     &:-webkit-scrollbar {
@@ -54,7 +57,5 @@
     border-radius: 10px;
     margin: 20px;
     padding: 20px;
-}
-.job-list {
     display: none;
 }

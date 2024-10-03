@@ -2,20 +2,28 @@ const mongoose = require('mongoose')
 
 const jobSchema = new mongoose.Schema(
     {
-        position : {
+        forId: {
             type: String,
-            required:[true,'Company name is required']
+            required: [true, 'forId must be provided']
+        },
+        position: {
+            type: String,
+            required: [true, 'Company name is required']
         },
         company: {
             type: String,
-            required:[true,'Company name is required']
+            required: [true, 'Company name is required']
         },
-        status : {
+        status: {
             type: String,
-            enum: ['current','open','closed','previous']
+            required: [true, 'Status is required'],
+            enum: ['current', 'open', 'closed', 'previous']
         },
-        date: Date
+        date: {
+            type: Date,
+            required: [true, 'Date is required']
+        }
     }
 )
 
-module.exports = mongoose.model('jobs',jobSchema)
+module.exports = mongoose.model('jobs', jobSchema)
