@@ -34,11 +34,13 @@ const getInfoFromApi = () => {
     y.open('GET', 'http://localhost:4000/api/getJob');
     y.setRequestHeader('authentication', authString)
     y.send()
-    y.onreadystatechange = () => {
-        if (x.readyState === XMLHttpRequest.DONE) {
-            const data_response = JSON.parse(y.response)
-            console.log(data_response.resp.length)
-            data_response.resp.forEach(items => {
+    y.onreadystatechange = async () => {
+        if (y.readyState === XMLHttpRequest.DONE) {
+            // console.log(y.response)
+            let resp_a = await y.responseText
+            // const data_response = await JSON.parse(y.response)
+            const resp_j = JSON.parse(resp_a)
+            resp_j.resp.forEach(items => {
                 //current open closed previous
                 if (items.status == "current") {
                     // clone job-crd and append to parent
@@ -49,13 +51,13 @@ const getInfoFromApi = () => {
                     // get template 
                     const clone = cardTemplate.cloneNode(true)
                     clone.style.display = 'flex'
-                    console.log(clone.children)
+                    // console.log(clone.children)
                     for (let i = 0; i < clone.children.length; i++) {
                         if (clone.children[i].className == 'company') {
                             clone.children[i].textContent = items.company
                         }
                         if (clone.children[i].className == 'dbid') {
-                            clone.children[i].textContent = items.forId
+                            clone.children[i].textContent = items._id
                         }
                         if (clone.children[i].className == 'date') {
                             clone.children[i].textContent = items.date
@@ -75,13 +77,13 @@ const getInfoFromApi = () => {
                     // get template 
                     const clone = cardTemplate.cloneNode(true)
                     clone.style.display = 'inline'
-                    console.log(clone.children)
+                    // console.log(clone.children)
                     for (let i = 0; i < clone.children.length; i++) {
                         if (clone.children[i].className == 'company') {
                             clone.children[i].textContent = items.company
                         }
                         if (clone.children[i].className == 'dbid') {
-                            clone.children[i].textContent = items.forId
+                            clone.children[i].textContent = items._id
                         }
                         if (clone.children[i].className == 'date') {
                             clone.children[i].textContent = items.date
@@ -101,13 +103,13 @@ const getInfoFromApi = () => {
                     // get template 
                     const clone = cardTemplate.cloneNode(true)
                     clone.style.display = 'block'
-                    console.log(clone.children)
+                    // console.log(clone.children)
                     for (let i = 0; i < clone.children.length; i++) {
                         if (clone.children[i].className == 'company') {
                             clone.children[i].textContent = items.company
                         }
                         if (clone.children[i].className == 'dbid') {
-                            clone.children[i].textContent = items.forId
+                            clone.children[i].textContent = items._id
                         }
                         if (clone.children[i].className == 'date') {
                             clone.children[i].textContent = items.date
@@ -127,13 +129,13 @@ const getInfoFromApi = () => {
                     // get template 
                     const clone = cardTemplate.cloneNode(true)
                     clone.style.display = 'block'
-                    console.log(clone.children)
+                    // console.log(clone.children)
                     for (let i = 0; i < clone.children.length; i++) {
                         if (clone.children[i].className == 'company') {
                             clone.children[i].textContent = items.company
                         }
                         if (clone.children[i].className == 'dbid') {
-                            clone.children[i].textContent = items.forId
+                            clone.children[i].textContent = items._id
                         }
                         if (clone.children[i].className == 'date') {
                             clone.children[i].textContent = items.date
