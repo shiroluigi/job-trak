@@ -1,5 +1,15 @@
 const text = 'New user registration';
 
+// ################# TEMPORARY LOGIN REDIRECT IF COOKIE ######################
+const cc = document.cookie.split(';')
+cc.forEach(cookie => {
+    const [a, b] = cookie.split('=');
+    if (a.trim() === 'token') {
+        window.location.href = '/dashboard'
+    }
+})
+// ###############################################################################
+
 const submit = (eventType, event) => {
     if (eventType == 'keypress') {
         if (event.key != 'Enter') {
