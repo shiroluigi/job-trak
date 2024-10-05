@@ -30,7 +30,7 @@ apiRouter.route('/users').get(getallusers).post(removeAll) //DANGER
 apiRouter.route('/login').post(loginUser)
 apiRouter.route('/register').post(registerUser)
 apiRouter.route('/dashboard').get(authenticator , dashboardGet)
-apiRouter.route('/create').post(authenticator, createJob)
+apiRouter.route('/create').get(authenticator).post(authenticator, createJob)
 apiRouter.route('/getJobs').get(getalljobs).post(deletejobs)//DANGER
 apiRouter.route('/getJob').get(authenticator, getJob)
 
