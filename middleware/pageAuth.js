@@ -21,7 +21,6 @@ const authenticator = (req, res, next) => {
             next()
         }
     })
-    // console.log("authentication middleware")
 }
 
 

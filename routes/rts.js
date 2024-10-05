@@ -22,6 +22,9 @@ webRouter.route('/dashboard').get(renderDashboard)
 webRouter.route('/register').get((req,res) => {
     res.render('register')
 })
+webRouter.route('/create').get((req,res)=>{
+    res.render('addJob')
+})
 
 apiRouter.route('/users').get(getallusers).post(removeAll) //DANGER
 apiRouter.route('/login').post(loginUser)

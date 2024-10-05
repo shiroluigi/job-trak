@@ -44,7 +44,7 @@ const submit = (eventType, event) => {
                         const [a, b] = cookie.split('=');
                         if (a.trim() === 'token') {
                             authString = 'Bearer ' + b.trim();
-                            console.log(authString)
+                            // console.log(authString)
                         }
                     })
                     const x = new XMLHttpRequest();
