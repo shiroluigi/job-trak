@@ -48,6 +48,7 @@ const removeAll = async (req, res) => {
 }
 const createJob = async (req,res) => {
     const { position,company , status , date } = req.body
+    console.log(req.body)
     if(!position || !company || !status  || !date)
     {
         res.status(500).json({msg: 'Incomplete info provided'})
