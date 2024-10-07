@@ -14,6 +14,7 @@ const loginUser = async (req, res) => {
     let { name, password } = req.body
     password = pbkdf2.pbkdf2Sync(password, process.env.SALT, 1, 32, 'sha512').toString('base64')
     const findUser = await user.findOne({ name, password })
+    // console.log(findUser)
     if (!findUser) {
         res.status(401).json({ msg: 'no match' })
         return
@@ -73,7 +74,13 @@ const getallusers = async (req, res) => {
     res.status(200).json({ msg: users })
     console.log(users)
 }
+const logout = (req,res) => {
+    console.log("logut")
+    res.locals.decrypt = ""
+    res.status(200).json({msg:'ok'})
+}
 const dashboardGet = async (req, res) => {
+    console.log(res.locals.decrypt)
     res.status(200).json({ msg: res.locals.decrypt })
 }
 const getJob = async (req,res) => {
@@ -102,5 +109,6 @@ module.exports = {
     createJob,
     getalljobs,
     deletejobs,
-    getJob
+    getJob,
+    logout
 }

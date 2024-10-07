@@ -33,7 +33,8 @@ const submit = (eventType, event) => {
             if (request.readyState === XMLHttpRequest.DONE) {
                 if (request.status === 200) {
                     // console.log(JSON.parse(request.responseText).token)
-                    document.cookie = `token=${JSON.parse(request.responseText).token};SameSite=None;secure`
+                    document.cookie = `token=${JSON.parse(request.responseText).token};`
+                    console.log(document.cookie)
                     //Set Auth header and add bearer to authorize and redirect if OK
                     let authString = ''
                     if (!document.cookie) {
@@ -48,7 +49,7 @@ const submit = (eventType, event) => {
                         }
                     })
                     const x = new XMLHttpRequest();
-                    x.open('GET', 'http://localhost:4000/api/dashboard');
+                    x.open('GET', '/api/dashboard');
                     x.setRequestHeader('authentication', authString)
                     x.send()
                     x.onreadystatechange = () => {
@@ -66,7 +67,7 @@ const submit = (eventType, event) => {
 }
 
 document.addEventListener('keypress', (e) => {
-    console.log(e.key)
+    // console.log(e.key)
     submit('keypress', e)
 })
 document.getElementById('loginClick').addEventListener('click', (e) => {

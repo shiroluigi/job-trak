@@ -12,7 +12,8 @@ const {
     createJob,
     getalljobs,
     deletejobs,
-    getJob
+    getJob,
+    logout
 } = require('../controllers/control.js')
 
 webRouter.route('/').get((req,res) => {
@@ -28,6 +29,7 @@ webRouter.route('/create').get((req,res)=>{
 
 apiRouter.route('/users').get(getallusers).post(removeAll) //DANGER
 apiRouter.route('/login').post(loginUser)
+apiRouter.route('/logout').get(logout)
 apiRouter.route('/register').post(registerUser)
 apiRouter.route('/dashboard').get(authenticator , dashboardGet)
 apiRouter.route('/create').get(authenticator).post(authenticator, createJob)

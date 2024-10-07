@@ -62,15 +62,16 @@ async function submitData() {
         window.location.href = '/'
     }
     const y = new XMLHttpRequest()
-    y.open("POST", "http://localhost:4000/api/create")
+    y.open("POST", "/api/create")
     y.withCredentials = true
     y.setRequestHeader('authentication', authString)
     y.setRequestHeader("Content-Type", "application/json");
     y.send(JSON.stringify(packed_data))
     y.onreadystatechange = () => {
         if (y.readyState == XMLHttpRequest.DONE) {
-            if (y.response.status == 200) {
-                console.log("okayyy")
+            if (y.status == 200) {
+                alert("Success!!")
+                window.location.href = "/"
             }
         }
     }

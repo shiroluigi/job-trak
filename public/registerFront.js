@@ -31,7 +31,7 @@ const submit = (eventType, event) => {
         email: email.trim()
     }
     const x = new XMLHttpRequest()
-    x.open('POST', 'http://localhost:4000/api/register', true)
+    x.open('POST', '/api/register', true)
     x.setRequestHeader('Content-Type', 'application/json')
     x.send(JSON.stringify(package))
     x.onreadystatechange = () => {

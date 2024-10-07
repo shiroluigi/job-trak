@@ -24,7 +24,7 @@ const getInfoFromApi = () => {
         window.location.href = '/'
     }
     const x = new XMLHttpRequest();
-    x.open('GET', 'http://localhost:4000/api/dashboard');
+    x.open('GET', '/api/dashboard');
     x.setRequestHeader('authentication', authString)
     x.send()
     x.onreadystatechange = () => {
@@ -42,7 +42,7 @@ const getInfoFromApi = () => {
     }
     //careful
     const y  = new XMLHttpRequest();
-    y.open('GET', 'http://localhost:4000/api/getJob');
+    y.open('GET', '/api/getJob');
     y.setRequestHeader('authentication', authString)
     y.send()
     y.onreadystatechange = async () => {
@@ -61,7 +61,7 @@ const getInfoFromApi = () => {
                     // parent.style.display = 'flex' //not needed anymore
                     // get template 
                     const clone = cardTemplate.cloneNode(true)
-                    clone.style.display = 'flex'
+                    clone.style.display = 'block'
                     // console.log(clone.children)
                     for (let i = 0; i < clone.children.length; i++) {
                         if (clone.children[i].className == 'company') {
@@ -87,7 +87,7 @@ const getInfoFromApi = () => {
                     // parent.style.display = 'flex' //not needed anymore
                     // get template 
                     const clone = cardTemplate.cloneNode(true)
-                    clone.style.display = 'inline'
+                    clone.style.display = 'block'
                     // console.log(clone.children)
                     for (let i = 0; i < clone.children.length; i++) {
                         if (clone.children[i].className == 'company') {
@@ -162,10 +162,18 @@ const getInfoFromApi = () => {
     }
 }
 
-document.getElementById('logout').addEventListener('click', () => {
+document.getElementById('logout').addEventListener('click',async () => {
     //Clear all cookie from stackOverflow https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
-    clearCookies()
-    document.location.href = '/'
+    const xhr = new XMLHttpRequest()
+    xhr.open("GET","/api/logout")
+    xhr.send()
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == XMLHttpRequest.DONE)
+        {
+                clearCookies()
+                document.location.href = '/'
+        }
+    }
 })
 
 for (let i = 0; i < document.getElementsByClassName('job-list').length; i++) {
