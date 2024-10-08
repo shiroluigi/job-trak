@@ -78,6 +78,10 @@ const getInfoFromApi = () => {
             if(pjs == false) {
                 document.getElementById('previous-job').style.display = "none";
             }
+            if(!cujs && !ojs && !cjs && !pjs)
+            {
+                document.getElementById('nojobs').style.display = "flex";
+            }
         }
     }
 }
