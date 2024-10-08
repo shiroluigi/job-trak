@@ -76,4 +76,7 @@ async function submitData() {
         }
     }
 }
+const cancel =  () => {
+    window.location.href = "/dashboard"
+}
 authenticate()
