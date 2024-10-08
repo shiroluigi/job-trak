@@ -123,8 +123,6 @@ document.getElementById('logout').addEventListener('click', async () => {
 for (let i = 0; i < document.getElementsByClassName('job-list').length; i++) {
     document.getElementsByClassName('job-list')[i].addEventListener('wheel', (e) => {
         e.preventDefault();
-        // console.log('scroll')
-        // console.log()
         document.getElementsByClassName('job-list')[i].scrollLeft += e.deltaY;
     })
 }
