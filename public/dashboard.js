@@ -129,7 +129,6 @@ const itemAddUtil = (items, id, auth) => {
 }
 
 document.getElementById('logout').addEventListener('click', async () => {
-    //Clear all cookie from stackOverflow https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
     const xhr = new XMLHttpRequest()
     xhr.open("GET", "/api/logout")
     xhr.send()

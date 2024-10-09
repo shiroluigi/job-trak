@@ -14,7 +14,6 @@ const loginUser = async (req, res) => {
     let { name, password } = req.body
     password = pbkdf2.pbkdf2Sync(password, process.env.SALT, 1, 32, 'sha512').toString('base64')
     const findUser = await user.findOne({ name, password })
-    // console.log(findUser)
     if (!findUser) {
         res.status(401).json({ msg: 'no match' })
         return
@@ -30,14 +29,11 @@ const loginUser = async (req, res) => {
     res.status(200).json({ token })
 }
 const registerUser = async (req, res) => {
-    console.log(req.body)
     let { name, password, email } = req.body
     const findUser = await user.findOne({ name })
-    // console.log("->",findUser)
     if (!findUser) {
         password = pbkdf2.pbkdf2Sync(password, process.env.SALT, 1, 32, 'sha512').toString('base64')
         const resp = await user.create({ name, password, email })
-        // console.log(resp)
         res.status(200).json({ msg: 'success' })
         return
     }
@@ -49,15 +45,12 @@ const removeAll = async (req, res) => {
 }
 const createJob = async (req,res) => {
     const { position,company , status , date } = req.body
-    console.log(req.body)
     if(!position || !company || !status  || !date)
     {
         res.status(500).json({msg: 'Incomplete info provided'})
     }
     try {
         const resp = await jobs.create({ forId: res.locals.decrypt.id , position , company , status , date})
-        console.log(resp)
-        console.log(req.body)
         res.status(200).json({ msg: "job creation hit" })
     } catch (error) {
         console.log(error)
@@ -68,24 +61,25 @@ const deletejobs = async  (req,res) => {
     const resp = await jobs.deleteMany()
     res.status(200).json(resp)
 }
-const deleteJob  = (req,res) =>{
+const deleteJob  = async (req,res) =>{
     const { jobId } = req.body
-    console.log(jobId)
+    const res_p = await jobs.deleteOne({_id:jobId})
+    if(!res_p)
+    {
+        res.status(404).json({})
+    }
     res.status(200).json({})
 }
 //GET
 const getallusers = async (req, res) => {
     const users = await user.find();
     res.status(200).json({ msg: users })
-    console.log(users)
 }
 const logout = (req,res) => {
-    console.log("logut")
     res.locals.decrypt = ""
     res.status(200).json({msg:'ok'})
 }
 const dashboardGet = async (req, res) => {
-    console.log(res.locals.decrypt)
     res.status(200).json({ msg: res.locals.decrypt })
 }
 const getJob = async (req,res) => {
