@@ -52,19 +52,19 @@ const getInfoFromApi = () => {
             resp_j.resp.forEach(items => {
                 if (items.status == "current") {
                     cujs = true
-                    itemAddUtil(items, "cujs")
+                    itemAddUtil(items, "cujs", authString )
                 }
                 if (items.status == "open") {
                     ojs = true
-                    itemAddUtil(items, "ojs")
+                    itemAddUtil(items, "ojs" , authString)
                 }
                 if (items.status == "closed") {
                     cjs = true
-                    itemAddUtil(items, "cjs")
+                    itemAddUtil(items, "cjs" ,authString)
                 }
                 if (items.status == "previous") {
                     pjs = true
-                    itemAddUtil(items, "pjs")
+                    itemAddUtil(items, "pjs", authString)
                 }
             })
             if(cujs == false) {
@@ -87,7 +87,7 @@ const getInfoFromApi = () => {
     }
 }
 
-const itemAddUtil = (items, id) => {
+const itemAddUtil = (items, id, auth) => {
     const parent = document.getElementById(id)
     const clone = cardTemplate.cloneNode(true)
     clone.style.display = 'block'
@@ -105,11 +105,25 @@ const itemAddUtil = (items, id) => {
             clone.children[i].textContent = items.position
         }
     }
-    
+
     // hacky way to delete job lol #############################################################
 
-    clone.children[8].addEventListener('click',()=>{
-        console.log(clone.children[3].textContent)
+    clone.children[8].addEventListener('click',async ()=>{
+        // console.log(clone.children[3].textContent)
+        const pack = {
+            jobId : clone.children[3].textContent,
+        }
+        const x = new XMLHttpRequest()
+        x.open('POST','/api/getJob')
+        x.setRequestHeader('authentication',auth)
+        x.setRequestHeader('Content-Type','application/json')
+        x.send(JSON.stringify(pack))
+        x.onreadystatechange = () => {
+            if(x.status == 200)
+            {
+                window.location.reload()
+            }
+        }
     })
     parent.appendChild(clone)
 }

@@ -68,6 +68,11 @@ const deletejobs = async  (req,res) => {
     const resp = await jobs.deleteMany()
     res.status(200).json(resp)
 }
+const deleteJob  = (req,res) =>{
+    const { jobId } = req.body
+    console.log(jobId)
+    res.status(200).json({})
+}
 //GET
 const getallusers = async (req, res) => {
     const users = await user.find();
@@ -110,5 +115,6 @@ module.exports = {
     getalljobs,
     deletejobs,
     getJob,
-    logout
+    logout,
+    deleteJob
 }

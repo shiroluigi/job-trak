@@ -13,7 +13,8 @@ const {
     getalljobs,
     deletejobs,
     getJob,
-    logout
+    logout,
+    deleteJob
 } = require('../controllers/control.js')
 
 webRouter.route('/').get((req,res) => {
@@ -34,7 +35,7 @@ apiRouter.route('/register').post(registerUser)
 apiRouter.route('/dashboard').get(authenticator , dashboardGet)
 apiRouter.route('/create').get(authenticator).post(authenticator, createJob)
 apiRouter.route('/getJobs').get(getalljobs).post(deletejobs)//DANGER
-apiRouter.route('/getJob').get(authenticator, getJob)
+apiRouter.route('/getJob').get(authenticator, getJob).post(authenticator , deleteJob)
 
 
 module.exports = { apiRouter,webRouter }
