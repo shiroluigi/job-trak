@@ -1,4 +1,5 @@
 const cardTemplate = document.getElementsByClassName('job-card')[0]
+
 const clearCookies = () => {
     document.cookie.split(';').forEach(cookie => {
         const eqPos = cookie.indexOf('=');
@@ -104,6 +105,12 @@ const itemAddUtil = (items, id) => {
             clone.children[i].textContent = items.position
         }
     }
+    
+    // hacky way to delete job lol #############################################################
+
+    clone.children[8].addEventListener('click',()=>{
+        console.log(clone.children[3].textContent)
+    })
     parent.appendChild(clone)
 }
 
