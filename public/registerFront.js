@@ -41,7 +41,7 @@ const submit = (eventType, event) => {
                 alert('Registration successfull')
                 window.location.href = '/'
             }else {
-                alert('Something went wrong, try again')
+                alert('User already exists!')
                 window.location.reload()
             }
         }

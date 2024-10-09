@@ -1,7 +1,7 @@
 
 const text = 'Login form'
 
-// ################# TEMPORARY LOGIN REDIRECT IF COOKIE ######################
+// ################# LOGIN REDIRECT IF COOKIE ######################
 const cc = document.cookie.split(';')
 cc.forEach(cookie => {
     const [a, b] = cookie.split('=');
@@ -20,7 +20,8 @@ const submit = (eventType, event) => {
         const uname = document.getElementById('user').value
         const password = document.getElementById('password').value
         if (!uname || !password || password.length <= 2) {
-            throw new Error("Uname or password is absent")
+            alert("Username or password is absent")
+            window.location.reload()
         }
         const details = {
             name: uname,
@@ -34,7 +35,6 @@ const submit = (eventType, event) => {
                 if (request.status === 200) {
                     // console.log(JSON.parse(request.responseText).token)
                     document.cookie = `token=${JSON.parse(request.responseText).token};`
-                    console.log(document.cookie)
                     //Set Auth header and add bearer to authorize and redirect if OK
                     let authString = ''
                     if (!document.cookie) {
@@ -58,6 +58,11 @@ const submit = (eventType, event) => {
                         }
                     }
                 }
+                else if(request.status == 401)
+                {
+                    alert('Invalid username or password')
+                    window.location.reload()
+                }
             }
         }
         request.send(JSON.stringify(details))
@@ -67,7 +72,6 @@ const submit = (eventType, event) => {
 }
 
 document.addEventListener('keypress', (e) => {
-    // console.log(e.key)
     submit('keypress', e)
 })
 document.getElementById('loginClick').addEventListener('click', (e) => {
